@@ -14,7 +14,7 @@ internal class Program
     static async Task Main(string[] args)
     {
         TraverseFileMatch += GlobbingTraverseFileMatch;
-        await GetProjectFiles(GetSolutionInfo().FullName);
+        await GetProjectFilesAsync(GetSolutionInfo().FullName);
         await File.WriteAllLinesAsync("Projects.txt", _projectNames);
     }
 

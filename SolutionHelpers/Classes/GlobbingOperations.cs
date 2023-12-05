@@ -7,7 +7,7 @@ internal class GlobbingOperations
     public delegate void OnTraverseFileMatch(FileMatchItem sender);
     public static event OnTraverseFileMatch? TraverseFileMatch;
 
-    public static async Task GetProjectFiles(string folder)
+    public static async Task GetProjectFilesAsync(string folder)
     {
 
         Matcher matcher = new();
