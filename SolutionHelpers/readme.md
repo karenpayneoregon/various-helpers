@@ -1,16 +1,7 @@
 ﻿# About
 
-Code which will write out all project names in a existing Visual Studio solution. Currently set to read the current solution.
+- Provides a method to get all solution names under a base folder
+- Provides a method to get all project names in a solution folder.
 
-Change this
 
-```csharp
-await GetProjectFiles(GetSolutionInfo().FullName);
-```
-
-To
-
-```csharp
-await GetProjectFiles(@"C:\DotNet\SomeSolution");
-```
 
