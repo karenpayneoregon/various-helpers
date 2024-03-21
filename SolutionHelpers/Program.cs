@@ -9,23 +9,24 @@ namespace SolutionHelpers;
 /// but you can replace GetSolutionInfo().FullName with the path to any
 /// existing solution.
 /// </summary>
+
 internal class Program
 {
-    private static List<string> _projectNames = new();
-    private static List<string> _solutionNames = new();
+    private static List<string> _projectNames = [];
+    private static List<string> _solutionNames = [];
 
     static async Task Main(string[] args)
     {
         TraverseFileMatch += GlobbingTraverseFileMatch;
-        TraverseSolutionMatch += GlobbingTraverseSolutionMatch  ;
+        TraverseSolutionMatch += GlobbingTraverseSolutionMatch;
 
         // write all project files to a file
         await GetProjectFilesAsync(GetSolutionInfo().FullName);
-        await GetProjectFilesAsync("C:\\OED\\DotnetLand\\VS2022\\closet-code");
+        await GetProjectFilesAsync("C:\\DotnetLand\\VS2022\\closet-code");
         await File.WriteAllLinesAsync("Projects.txt", _projectNames);
 
         // write all solution names to a file
-        await GetSolutionFilesAsync("C:\\OED\\DotnetLand\\VS2022");
+        await GetSolutionFilesAsync("C:\\DotnetLand\\VS2022");
         await File.WriteAllLinesAsync("Solutions.txt", _solutionNames);
 
     }
