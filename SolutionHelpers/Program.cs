@@ -20,8 +20,9 @@ internal class Program
         TraverseSolutionMatch += GlobbingTraverseSolutionMatch;
 
         // write all project files to a file
-        await GetProjectFilesAsync(GetSolutionInfo().FullName);
+        //await GetProjectFilesAsync(GetSolutionInfo().FullName);
         await GetProjectFilesAsync("C:\\DotnetLand\\VS2022\\closet-code");
+
         await File.WriteAllLinesAsync("Projects.txt", _projectNames);
 
         // write all solution names to a file
