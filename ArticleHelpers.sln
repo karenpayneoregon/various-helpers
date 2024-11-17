@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.md = readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityLogFinder", "ActivityLogFinder\ActivityLogFinder.csproj", "{4D08546E-8DEB-48BF-9F04-ADB8EA854293}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{B4C69D03-AC76-49F2-BAD1-6801E3C4B2F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4C69D03-AC76-49F2-BAD1-6801E3C4B2F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4C69D03-AC76-49F2-BAD1-6801E3C4B2F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D08546E-8DEB-48BF-9F04-ADB8EA854293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D08546E-8DEB-48BF-9F04-ADB8EA854293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D08546E-8DEB-48BF-9F04-ADB8EA854293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D08546E-8DEB-48BF-9F04-ADB8EA854293}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

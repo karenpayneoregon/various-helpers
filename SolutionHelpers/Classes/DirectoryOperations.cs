@@ -1,4 +1,5 @@
-﻿namespace SolutionHelpers.Classes;
+﻿// ReSharper disable NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
+namespace SolutionHelpers.Classes;
 internal class DirectoryOperations
 {
     /// <summary>

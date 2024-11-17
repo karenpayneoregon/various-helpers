@@ -21,7 +21,7 @@ internal class Program
 
         // write all project files to a file
         //await GetProjectFilesAsync(GetSolutionInfo().FullName);
-        await GetProjectFilesAsync("C:\\DotnetLand\\VS2022\\closet-code");
+        await GetProjectFilesAsync("C:\\OED\\DotnetLand\\VS2022\\SpectreConsoleHelpersSolution");
 
         await File.WriteAllLinesAsync("Projects.txt", _projectNames);
 
