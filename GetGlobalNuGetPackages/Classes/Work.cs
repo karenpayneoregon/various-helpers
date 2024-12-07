@@ -14,9 +14,9 @@ public partial class Work
         {
             string packageName = Path.GetFileName(packageFolder);
 
-            foreach (string versionFolder in Directory.GetDirectories(packageFolder))
+            foreach (string folder in Directory.GetDirectories(packageFolder))
             {
-                string version = Path.GetFileName(versionFolder);
+                string version = Path.GetFileName(folder);
 
                 if (!VersionRegex().IsMatch(version)) continue;
                 packages.Add(new Package { Name = packageName, Version = version });
