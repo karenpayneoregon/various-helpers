@@ -1,12 +1,16 @@
 ﻿using GetGlobalNuGetPackages.Classes;
 using GetGlobalNuGetPackages.Models;
-using System.Net;
+using NuGet.Common;
+using NuGet.Protocol;
+using NuGet.Protocol.Core.Types;
+using NuGet.Versioning;
+
 
 namespace GetGlobalNuGetPackages;
 
 internal partial class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         Work.Packages();
 
@@ -38,7 +42,9 @@ internal partial class Program
             AnsiConsole.MarkupLine($"[red]Not found[/] {PackageSettings.Instance.Path}");
         }
 
-        SpectreConsoleHelpers.ExitPrompt();
+        await Work.HowToGetVersionsForSeriLog();
+
+        Console.ReadLine();
     }
 
     /// <summary>
@@ -59,7 +65,7 @@ internal partial class Program
         if (bogusList.Count > 0)
         {
             AnsiConsole.MarkupLine($"[lime]Bogus packages[/] {bogusList.Count:N0}");
-            var versions = string.Join(",",bogusList.Select(x => x.Version).ToList());
+            var versions = string.Join(",", bogusList.Select(x => x.Version).ToList());
             versions.ColorizeComma();
         }
         else
@@ -68,10 +74,6 @@ internal partial class Program
         }
     }
 
-    private static async Task GetFromNuGet()
-    {
-        var client = new HttpClient();
-        var streamTask = client.GetStringAsync("https://api.nuget.org/v3/catalog0/index.json");
-        var responseText = await streamTask;
-    }
+
+
 }

@@ -1,6 +1,11 @@
+using System.Text;
 using GetGlobalNuGetPackages.Models;
+using NuGet.Common;
 using NuGet.Configuration;
+using NuGet.Protocol.Core.Types;
+using NuGet.Versioning;
 using System.Text.RegularExpressions;
+using NuGet.Protocol;
 
 namespace GetGlobalNuGetPackages.Classes;
 
@@ -63,5 +68,41 @@ public partial class Work
 
     [GeneratedRegex(@"^(?=(.*\.){2,})(?=(.*\d){2,}).*$")]
     private static partial Regex VersionRegex();
+
+
+    /// <summary>
+    /// Asynchronously retrieves and displays all available versions of the Serilog NuGet package.
+    /// </summary>
+    /// <remarks>
+    /// This method connects to the NuGet V3 API to fetch version information for the Serilog package.
+    /// </remarks>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    public static async Task HowToGetVersionsForSeriLog()
+    {
+
+        ILogger logger = NullLogger.Instance;
+        CancellationToken cancellationToken = CancellationToken.None;
+
+        SourceCacheContext cache = new SourceCacheContext();
+        SourceRepository repository = Repository.Factory.GetCoreV3("https://api.nuget.org/v3/index.json");
+        FindPackageByIdResource resource = await repository.GetResourceAsync<FindPackageByIdResource>(cancellationToken);
+
+        IEnumerable<NuGetVersion> versions = await resource.GetAllVersionsAsync(
+            "Serilog",
+            cache,
+            logger,
+            cancellationToken);
+
+        StringBuilder stringBuilder = new();
+        foreach (NuGetVersion version in versions)
+        {
+            
+            stringBuilder.AppendLine(version.ToString());
+        }
+
+        await File.WriteAllTextAsync("SerilogVersions.txt", stringBuilder.ToString(), cancellationToken);
+
+        AnsiConsole.MarkupLine($"[yellow]Serilog versions[/] {versions.Count():N0} [yellow]see SerilogVersions.txt[/]");
+    }
 }
 

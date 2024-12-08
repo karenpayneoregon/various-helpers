@@ -8,7 +8,10 @@ This project goal is to show how a new developer or even a season developer can 
 
 ## Requires
 
-:small_orange_diamond: NuGet package [NuGet.Configuration](https://www.nuget.org/packages/NuGet.Configuration/6.12.1?_src=template)
+- NuGet package [NuGet.Configuration](https://www.nuget.org/packages/NuGet.Configuration/6.12.1?_src=template)
+- NuGet package [NuGet.Protocol](https://www.nuget.org/packages/NuGet.Protocol/6.12.1?_src=template)
+
+
 
 ## NuGet documentation
 
@@ -20,8 +23,15 @@ If new to working with NuGet packages this is where to start learning.
 
 ## Microsoft Documentation for NuGet Client Tools
 
-Found [here](https://github.com/NuGet/NuGet.Client/tree/dev) along with other references.
+- Found [here](https://github.com/NuGet/NuGet.Client/tree/dev) along with other references.
+- NuGet [Client SDK](https://learn.microsoft.com/en-us/nuget/reference/nuget-client-sdk)
 
 ## Repo for NuGet Client issues
 
 The [Home repository](https://github.com/nuget/Home) is the starting point for people to learn about NuGet, the project.
+
+## Project documentation
+
+Used Jetbrains [AI assistant](https://www.jetbrains.com/ai/) to create the project documentation and in some cases modifed by hand.
+
+Way too many developers fail to write documentation for their code, with either Jetbrains AI assistant or GitHub [Copilot](https://github.com/features/copilot?ocid=AIDcmmb150vbv1_SEM__k_Cj0KCQiApNW6BhD5ARIsACmEbkWFGYZBa2oHA-voKTZ4SL5l3zx0GnWAoQDelxS3VVFXxhV4TvBuyNEaAn4vEALw_wcB_k_) developers can now write documentation for their code with these tools, review, keep `as is` or `modify` to suit their needs.
