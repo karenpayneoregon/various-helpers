@@ -6,6 +6,7 @@ internal partial class Program
 {
     static void Main(string[] args)
     {
+        Work.GetPackages();
         if (Directory.Exists(PackageSettings.Instance.Path))
         {
             var packages = Work.AvailablePackages();

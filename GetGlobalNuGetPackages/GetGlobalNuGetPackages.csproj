@@ -30,4 +30,9 @@
 		<PackageReference Include="Spectre.Console" Version="0.46.0" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+	  <Folder Include="Classes\Stash\" />
+	</ItemGroup>
+
 </Project>
