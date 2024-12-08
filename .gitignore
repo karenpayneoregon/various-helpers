@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /GetGlobalNuGetPackages/Classes/Stash/PackageSettings.txt
 /GetGlobalNuGetPackages/Classes/Stash/Work.txt
+/GetGlobalNuGetPackages/Classes/Stash/FromChatGPT.txt
