@@ -1,0 +1,21 @@
+﻿<Window x:Class="NuGetPackageSourceApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NuGetPackageSourceApp"
+        mc:Ignorable="d"
+        Title="NuGet package sources" Height="302" Width="625" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ListBox Name="NuGetListBox" ItemsSource="{Binding ListBoxData}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" MinWidth="200"/>
+                        <TextBlock Text="{Binding Source}" MinWidth="200"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
