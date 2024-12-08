@@ -1,6 +1,5 @@
 using GetGlobalNuGetPackages.Models;
 using NuGet.Configuration;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace GetGlobalNuGetPackages.Classes;
@@ -21,16 +20,16 @@ public partial class Work
         {
             string packageName = Path.GetFileName(packageFolder);
 
-            foreach (string folder in Directory.GetDirectories(packageFolder))
-            {
-                string version = Path.GetFileName(folder);
-
-                if (!VersionRegex().IsMatch(version)) continue;
-                packages.Add(new Package { Name = packageName, Version = version });
-            }
+            packages.AddRange(
+                from folder in Directory.GetDirectories(packageFolder) 
+                select Path.GetFileName(folder) into version 
+                where VersionRegex().IsMatch(version) 
+                select new Package { Name = packageName, Version = version });
         }
 
+
         return packages;
+
     }
 
     /// <summary>
@@ -41,24 +40,14 @@ public partial class Work
     {
         List<NuGetPackage> list = [];
 
-        string configFilePath = null;
+        ISettings settings = Settings.LoadDefaultSettings(null);
 
-        // Load NuGet settings
-        ISettings settings = Settings.LoadDefaultSettings(configFilePath);
-
-        // Get the list of all package sources
         PackageSourceProvider packageSourceProvider = new PackageSourceProvider(settings);
         var packageSources = packageSourceProvider.LoadPackageSources();
 
-        // Enable a specific package source
-        string sourceNameToEnable = "nuget"; // Replace with your desired source name
         foreach (var source in packageSources)
         {
-            if (source.Name.Equals(sourceNameToEnable, StringComparison.OrdinalIgnoreCase))
-            {
-                var isEnabled = source.IsEnabled;
-            }
-
+            
             list.Add(new NuGetPackage()
             {
                 Name = source.Name, 
@@ -66,6 +55,7 @@ public partial class Work
                 Enabled = source.IsEnabled,
                 HasCredentials = source.Credentials != null
             });
+
         }
 
         return list;
@@ -74,3 +64,4 @@ public partial class Work
     [GeneratedRegex(@"^(?=(.*\.){2,})(?=(.*\d){2,}).*$")]
     private static partial Regex VersionRegex();
 }
+

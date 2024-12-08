@@ -21,9 +21,15 @@ public static class SpectreConsoleHelpers
         AnsiConsole.WriteLine();
     }
 
+    public static void ColorizeComma(this string sender)
+    {
+        sender = sender.Replace(",", "[red],[/]");
+        AnsiConsole.MarkupLine(sender);
+    }
+
     public static void PrintCyan([CallerMemberName] string? methodName = null)
     {
-        AnsiConsole.MarkupLine($"[cyan]{methodName}[/]");
+        AnsiConsole.MarkupLine($"[cyan]{methodName.SplitCase()}[/]");
         Console.WriteLine();
     }
 

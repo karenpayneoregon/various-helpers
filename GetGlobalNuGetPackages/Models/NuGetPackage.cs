@@ -1,7 +1,7 @@
 ﻿namespace GetGlobalNuGetPackages.Models;
 
 /// <summary>
-/// Represents a NuGet package with its name, source, and enabled status.
+/// Represents a NuGet package.
 /// </summary>
 public class NuGetPackage
 {
@@ -10,5 +10,4 @@ public class NuGetPackage
     public bool Enabled { get; set; }
     public bool HasCredentials { get; set; }
     public override string ToString() => Name;
-
 }

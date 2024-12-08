@@ -21,7 +21,11 @@ public sealed class PackageSettings
     /// </value>
     public string Path { get; init; }
 
+    public List<string> DisabledSources { get; init; }
 
+    /// <summary>
+    /// Gets the list of NuGet packages
+    /// </summary>
     public List<NuGetPackage> NuGetPackages { get; set; }
 
     private PackageSettings()
@@ -29,6 +33,18 @@ public sealed class PackageSettings
         NuGetSettings = Settings.LoadDefaultSettings(null);
         Path = SettingsUtility.GetGlobalPackagesFolder(NuGetSettings);
         NuGetPackages = Work.Packages();
+
+        /*
+         * Get the list of disabled package sources from the NuGet configuration.
+         * The real purpose of this code is to show that from exploring the codebase, that there
+         * is a class NuGet.Configuration.ConfigurationConstants that contains constant node names
+         * to reference in the NuGet configuration file rather than hard coding them and by hard coding these
+         * may cause issues in the future if the node name changes.
+         */
+        var disableSources = NuGetSettings.GetSection(ConfigurationConstants.DisabledPackageSources);
+
+        DisabledSources = disableSources.Items.Select(x => 
+            x.GetAttributes().Values.FirstOrDefault()).ToList();
     }
 
 }
