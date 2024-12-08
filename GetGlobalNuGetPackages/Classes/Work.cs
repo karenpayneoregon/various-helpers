@@ -1,3 +1,4 @@
+using GetGlobalNuGetPackages.Models;
 using NuGet.Configuration;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -6,6 +7,10 @@ namespace GetGlobalNuGetPackages.Classes;
 
 public partial class Work
 {
+    /// <summary>
+    /// Retrieves a list of available NuGet packages from the global packages folder.
+    /// </summary>
+    /// <returns>A list of <see cref="Package"/> objects representing the available packages.</returns>
     public static List<Package> AvailablePackages()
     {
         List<Package> packages = [];
@@ -28,7 +33,11 @@ public partial class Work
         return packages;
     }
 
-    public static List<NuGetPackage> GetPackages()
+    /// <summary>
+    /// Retrieves a list of NuGet package sources, including their names, sources, and enabled statuses.
+    /// </summary>
+    /// <returns>A list of <see cref="NuGetPackage"/> objects representing the package sources.</returns>
+    public static List<NuGetPackage> Packages()
     {
         List<NuGetPackage> list = [];
 
@@ -54,7 +63,8 @@ public partial class Work
             {
                 Name = source.Name, 
                 Source = source.Source,
-                Enabled = source.IsEnabled
+                Enabled = source.IsEnabled,
+                HasCredentials = source.Credentials != null
             });
         }
 

@@ -7,7 +7,7 @@ internal partial class Program
     [ModuleInitializer]
     public static void Init()
     {
-        Console.Title = "Code sample";
+        Console.Title = "NuGet Packages";
         WindowUtility.SetConsoleWindowPosition(WindowUtility.AnchorWindow.Center);
     }
 }
