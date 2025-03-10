@@ -18,7 +18,7 @@ internal class GlobbingOperations
     {
 
         Matcher matcher = new();
-        matcher.AddIncludePatterns(new[] { "**/*.csproj" });
+        matcher.AddIncludePatterns(["**/*.csproj"]);
 
         await Task.Run(() =>
         {
@@ -37,7 +37,7 @@ internal class GlobbingOperations
     {
 
         Matcher matcher = new();
-        matcher.AddIncludePatterns(new[] { "**/*.sln" });
+        matcher.AddIncludePatterns(["**/*.sln"]);
 
         await Task.Run(() =>
         {
