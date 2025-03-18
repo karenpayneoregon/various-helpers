@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetPackageSourceApp", "Nu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindUserSecretsApp", "FindUserSecretsApp\FindUserSecretsApp.csproj", "{A5D54C80-B343-0AEB-C8E8-6B8F3917EEEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindInterfaces", "FindInterfaces\FindInterfaces.csproj", "{D72AA33D-26F2-2DA6-48E1-54CBF7552FA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{A5D54C80-B343-0AEB-C8E8-6B8F3917EEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5D54C80-B343-0AEB-C8E8-6B8F3917EEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5D54C80-B343-0AEB-C8E8-6B8F3917EEEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D72AA33D-26F2-2DA6-48E1-54CBF7552FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D72AA33D-26F2-2DA6-48E1-54CBF7552FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D72AA33D-26F2-2DA6-48E1-54CBF7552FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D72AA33D-26F2-2DA6-48E1-54CBF7552FA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

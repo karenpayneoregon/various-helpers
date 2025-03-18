@@ -3,7 +3,7 @@
 Used to get all C# project files with secrets where all a developer’s solutions are all under a central folder.
 
 > **Note**
-> New version coming soon.
+> New version done but in another solution.
 
 ## Instructions
 
