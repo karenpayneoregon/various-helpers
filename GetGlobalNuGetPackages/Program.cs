@@ -29,6 +29,8 @@ internal partial class Program
                 Justification = Justify.Left
             };
             AnsiConsole.Write(rule);
+
+
             foreach (var p in PackageSettings.Instance.NuGetPackages)
             {
                 AnsiConsole.MarkupLine($"[white]{p.Name}[/]");

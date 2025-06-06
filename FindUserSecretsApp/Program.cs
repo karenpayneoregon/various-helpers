@@ -15,7 +15,7 @@ internal partial class Program
             return;
         }
 
-        const string rootDirectory = @"TODO - see readme file instructions";
+        string rootDirectory = "Path to your solution folder";
         const string outputFile = @"UserSecretsProjects.json";
 
         List<SecretItem> secretItems = [];

@@ -32,7 +32,7 @@ public sealed class PackageSettings
     {
         NuGetSettings = Settings.LoadDefaultSettings(null);
         Path = SettingsUtility.GetGlobalPackagesFolder(NuGetSettings);
-        var test = Path;
+        
         NuGetPackages = Work.Packages();
 
         /*
