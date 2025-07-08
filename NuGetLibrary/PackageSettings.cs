@@ -1,7 +1,8 @@
 using NuGet.Configuration;
-using NuGetPackageSourceApp.Models;
+using NuGetLibrary.Models;
+#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
 
-namespace NuGetPackageSourceApp.Classes;
+namespace NuGetLibrary;
 
 /// <summary>
 /// Represents the settings for managing NuGet packages, including configuration
@@ -13,6 +14,7 @@ public sealed class PackageSettings
     public static PackageSettings Instance => Lazy.Value;
 
     public ISettings NuGetSettings { get; set; }
+
     /// <summary>
     /// Gets the path to the global NuGet packages folder.
     /// </summary>
@@ -32,7 +34,8 @@ public sealed class PackageSettings
     {
         NuGetSettings = Settings.LoadDefaultSettings(null);
         Path = SettingsUtility.GetGlobalPackagesFolder(NuGetSettings);
-        NuGetPackages = Work.Packages();
+        
+        NuGetPackages = PackageWork.Packages();
 
         /*
          * Get the list of disabled package sources from the NuGet configuration.
@@ -41,9 +44,9 @@ public sealed class PackageSettings
          * to reference in the NuGet configuration file rather than hard coding them and by hard coding these
          * may cause issues in the future if the node name changes.
          */
-        var disableSources = NuGetSettings.GetSection(ConfigurationConstants.DisabledPackageSources);
+        SettingSection? disableSources = NuGetSettings.GetSection(ConfigurationConstants.DisabledPackageSources);
 
-        DisabledSources = disableSources.Items.Select(x => 
+        DisabledSources = disableSources!.Items.Select(x => 
             x.GetAttributes().Values.FirstOrDefault()).ToList();
     }
 

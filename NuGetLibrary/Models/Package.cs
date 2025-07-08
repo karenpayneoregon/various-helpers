@@ -1,4 +1,5 @@
-﻿namespace NuGetPackageSourceApp.Models;
+﻿#nullable disable
+namespace NuGetLibrary.Models;
 
 /// <summary>
 /// Represents a NuGet package with its name and version information.

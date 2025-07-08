@@ -34,10 +34,11 @@ partial class Form1
         NameTextBox = new TextBox();
         label2 = new Label();
         CommandTextBox = new TextBox();
-        label3 = new Label();
+        titleLabel = new Label();
         TitleTextBox = new TextBox();
         label4 = new Label();
         InitialDirectoryTextBox = new TextBox();
+        OpenSourceFileButton = new Button();
         (BindingNavigator1).BeginInit();
         SuspendLayout();
         // 
@@ -83,14 +84,14 @@ partial class Form1
         CommandTextBox.Size = new Size(831, 27);
         CommandTextBox.TabIndex = 4;
         // 
-        // label3
+        // titleLabel
         // 
-        label3.AutoSize = true;
-        label3.Location = new Point(23, 121);
-        label3.Name = "label3";
-        label3.Size = new Size(38, 20);
-        label3.TabIndex = 5;
-        label3.Text = "Title";
+        titleLabel.AutoSize = true;
+        titleLabel.Location = new Point(23, 121);
+        titleLabel.Name = "titleLabel";
+        titleLabel.Size = new Size(38, 20);
+        titleLabel.TabIndex = 5;
+        titleLabel.Text = "Title";
         // 
         // TitleTextBox
         // 
@@ -117,15 +118,27 @@ partial class Form1
         InitialDirectoryTextBox.Size = new Size(831, 27);
         InitialDirectoryTextBox.TabIndex = 8;
         // 
+        // OpenSourceFileButton
+        // 
+        OpenSourceFileButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+        OpenSourceFileButton.Location = new Point(609, 324);
+        OpenSourceFileButton.Name = "OpenSourceFileButton";
+        OpenSourceFileButton.Size = new Size(244, 29);
+        OpenSourceFileButton.TabIndex = 9;
+        OpenSourceFileButton.Text = "Open source file";
+        OpenSourceFileButton.UseVisualStyleBackColor = true;
+        OpenSourceFileButton.Click += OpenSourceFileButton_Click;
+        // 
         // Form1
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(877, 365);
+        Controls.Add(OpenSourceFileButton);
         Controls.Add(InitialDirectoryTextBox);
         Controls.Add(label4);
         Controls.Add(TitleTextBox);
-        Controls.Add(label3);
+        Controls.Add(titleLabel);
         Controls.Add(CommandTextBox);
         Controls.Add(label2);
         Controls.Add(NameTextBox);
@@ -147,8 +160,9 @@ partial class Form1
     private TextBox NameTextBox;
     private Label label2;
     private TextBox CommandTextBox;
-    private Label label3;
+    private Label titleLabel;
     private TextBox TitleTextBox;
     private Label label4;
     private TextBox InitialDirectoryTextBox;
+    private Button OpenSourceFileButton;
 }

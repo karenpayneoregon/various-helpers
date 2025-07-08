@@ -1,15 +1,15 @@
 using System.Text;
-using GetGlobalNuGetPackages.Models;
+using System.Text.RegularExpressions;
 using NuGet.Common;
 using NuGet.Configuration;
+using NuGet.Protocol;
 using NuGet.Protocol.Core.Types;
 using NuGet.Versioning;
-using System.Text.RegularExpressions;
-using NuGet.Protocol;
+using NuGetLibrary.Models;
 
-namespace GetGlobalNuGetPackages.Classes;
+namespace NuGetLibrary;
 
-public partial class Work
+public partial class PackageWork
 {
     /// <summary>
     /// Retrieves a list of available NuGet packages from the global packages folder.
@@ -66,9 +66,6 @@ public partial class Work
         return list;
     }
 
-    [GeneratedRegex(@"^(?=(.*\.){2,})(?=(.*\d){2,}).*$")]
-    private static partial Regex VersionRegex();
-
 
     /// <summary>
     /// Asynchronously retrieves and displays all available versions of the Serilog NuGet package.
@@ -77,7 +74,7 @@ public partial class Work
     /// This method connects to the NuGet V3 API to fetch version information for the Serilog package.
     /// </remarks>
     /// <returns>A task representing the asynchronous operation.</returns>
-    public static async Task HowToGetVersionsForSeriLog()
+    public static async Task GetVersionsForSeriLog()
     {
 
         ILogger logger = NullLogger.Instance;
@@ -102,7 +99,18 @@ public partial class Work
 
         await File.WriteAllTextAsync("SerilogVersions.txt", stringBuilder.ToString(), cancellationToken);
 
-        AnsiConsole.MarkupLine($"[yellow]Serilog versions[/] {versions.Count():N0} [yellow]see SerilogVersions.txt[/]");
     }
+
+    /// <summary>
+    /// Filters the provided list of NuGet packages to return only those that match the specified package name.
+    /// </summary>
+    /// <param name="packages">The list of <see cref="Package"/> objects to search through.</param>
+    /// <param name="packageName">The name of the package to filter by.</param>
+    /// <returns>A list of <see cref="Package"/> objects whose names match the specified <paramref name="packageName"/>.</returns>
+    public static List<Package> GetPackagesByName(List<Package> packages, string packageName) 
+        => packages.Where(x => x.Name == packageName).ToList();
+
+    [GeneratedRegex(@"^(?=(.*\.){2,})(?=(.*\d){2,}).*$")]
+    private static partial Regex VersionRegex();
 }
 

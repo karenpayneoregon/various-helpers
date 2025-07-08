@@ -41,7 +41,7 @@ public class ExternalToolsOperations
 
         var toolsRoot = doc
             .Descendants("Category")
-            .FirstOrDefault(c => (string)c.Attribute("name") == "Environment_ExternalTools")
+                .FirstOrDefault(c => (string?)c.Attribute("name") == "Environment_ExternalTools")
             ?.Element("ExternalTools");
 
         if (toolsRoot == null)
@@ -85,7 +85,7 @@ public class ExternalToolsOperations
     {
         var options = new JsonSerializerOptions
         {
-            WriteIndented = true 
+            WriteIndented = true
         };
 
         File.WriteAllText(outputPath, JsonSerializer.Serialize(tools, options));

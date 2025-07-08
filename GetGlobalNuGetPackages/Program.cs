@@ -1,9 +1,6 @@
 ﻿using GetGlobalNuGetPackages.Classes;
-using GetGlobalNuGetPackages.Models;
-using NuGet.Common;
-using NuGet.Protocol;
-using NuGet.Protocol.Core.Types;
-using NuGet.Versioning;
+using NuGetLibrary;
+using NuGetLibrary.Models;
 
 
 namespace GetGlobalNuGetPackages;
@@ -12,15 +9,16 @@ internal partial class Program
 {
     static async Task Main(string[] args)
     {
-        Work.Packages();
+
+        PackageWork.Packages();
 
         if (Directory.Exists(PackageSettings.Instance.Path))
         {
-            var packages = Work.AvailablePackages();
+            var packages = PackageWork.AvailablePackages();
             AnsiConsole.MarkupLine($"[yellow]Local package count[/] {packages.Count:N0}");
             Console.WriteLine();
 
-            ExtractPackagesByName(packages, "bogus");
+            ExtractPackagesByName(packages, "serilog.aspnetcore");
 
             Console.WriteLine();
 
@@ -44,7 +42,7 @@ internal partial class Program
             AnsiConsole.MarkupLine($"[red]Not found[/] {PackageSettings.Instance.Path}");
         }
 
-        await Work.HowToGetVersionsForSeriLog();
+        await PackageWork.GetVersionsForSeriLog();
 
         Console.ReadLine();
     }
@@ -52,7 +50,7 @@ internal partial class Program
     /// <summary>
     /// Extracts and processes NuGet packages with the specified name from the provided list.
     /// </summary>
-    /// <param name="packages">A list of <see cref="Package"/> objects to be filtered and processed.</param>
+    /// <param name="packages">A list of <see cref="NuGetLibrary.Models.Package"/> objects to be filtered and processed.</param>
     /// <param name="packageName">Name of package</param>
     /// <remarks>
     /// In this example the method filters the provided list of packages by the name "bogus" and processes the results.
@@ -62,17 +60,17 @@ internal partial class Program
 
         SpectreConsoleHelpers.PrintCyan();
 
-        var bogusList = packages.Where(x => x.Name == packageName).ToList();
+        List<Package> packageList = PackageWork.GetPackagesByName(packages, packageName);
 
-        if (bogusList.Count > 0)
+        if (packageList.Count > 0)
         {
-            AnsiConsole.MarkupLine($"[lime]Bogus packages[/] {bogusList.Count:N0}");
-            var versions = string.Join(",", bogusList.Select(x => x.Version).ToList());
+            AnsiConsole.MarkupLine($"[lime]{packageName} packages[/] {packageList.Count:N0}");
+            var versions = string.Join(",", packageList.Select(x => x.Version).ToList());
             versions.ColorizeComma();
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]No bogus packages found[/]");
+            AnsiConsole.MarkupLine($"[red]No {packageName} packages found[/]");
         }
     }
 

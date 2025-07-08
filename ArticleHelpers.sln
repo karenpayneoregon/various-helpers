@@ -16,13 +16,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetGlobalNuGetPackages", "G
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{055A1CBA-6E5C-401B-B13A-F1EC2F213156}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetPackageSourceApp", "NuGetPackageSourceApp\NuGetPackageSourceApp.csproj", "{29A2DC87-27D0-4A90-ACCB-821600EEEB4A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindUserSecretsApp", "FindUserSecretsApp\FindUserSecretsApp.csproj", "{A5D54C80-B343-0AEB-C8E8-6B8F3917EEEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindInterfaces", "FindInterfaces\FindInterfaces.csproj", "{D72AA33D-26F2-2DA6-48E1-54CBF7552FA0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualStudioExternalToolsApp", "VisualStudioExternalToolsApp\VisualStudioExternalToolsApp.csproj", "{CC423012-EF25-4E9C-AF18-F5442922A128}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{813F2800-5A06-4E98-B675-EC18B1B5B26C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetLibrary", "NuGetLibrary\NuGetLibrary.csproj", "{38120D23-C87D-4AAC-AE14-3AB220673070}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +44,6 @@ Global
 		{6B064531-3D59-4FB2-8289-F8E01C232DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B064531-3D59-4FB2-8289-F8E01C232DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B064531-3D59-4FB2-8289-F8E01C232DFE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29A2DC87-27D0-4A90-ACCB-821600EEEB4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29A2DC87-27D0-4A90-ACCB-821600EEEB4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29A2DC87-27D0-4A90-ACCB-821600EEEB4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29A2DC87-27D0-4A90-ACCB-821600EEEB4A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5D54C80-B343-0AEB-C8E8-6B8F3917EEEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5D54C80-B343-0AEB-C8E8-6B8F3917EEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5D54C80-B343-0AEB-C8E8-6B8F3917EEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,13 +56,21 @@ Global
 		{CC423012-EF25-4E9C-AF18-F5442922A128}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC423012-EF25-4E9C-AF18-F5442922A128}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC423012-EF25-4E9C-AF18-F5442922A128}.Release|Any CPU.Build.0 = Release|Any CPU
+		{813F2800-5A06-4E98-B675-EC18B1B5B26C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{813F2800-5A06-4E98-B675-EC18B1B5B26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{813F2800-5A06-4E98-B675-EC18B1B5B26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{813F2800-5A06-4E98-B675-EC18B1B5B26C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38120D23-C87D-4AAC-AE14-3AB220673070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38120D23-C87D-4AAC-AE14-3AB220673070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38120D23-C87D-4AAC-AE14-3AB220673070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38120D23-C87D-4AAC-AE14-3AB220673070}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6B064531-3D59-4FB2-8289-F8E01C232DFE} = {055A1CBA-6E5C-401B-B13A-F1EC2F213156}
-		{29A2DC87-27D0-4A90-ACCB-821600EEEB4A} = {055A1CBA-6E5C-401B-B13A-F1EC2F213156}
+		{38120D23-C87D-4AAC-AE14-3AB220673070} = {055A1CBA-6E5C-401B-B13A-F1EC2F213156}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A57DFCC2-668D-4FB7-A4E3-C45937B89A88}
