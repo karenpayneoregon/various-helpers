@@ -5,6 +5,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="readme.md" />
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="NuGet.Configuration" Version="6.12.1" />
 		<PackageReference Include="NuGet.Protocol" Version="6.12.1" />
