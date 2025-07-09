@@ -2,8 +2,6 @@
 
 :stop_sign: Before running inspect paths :stop_sign:
 
-- Provides a method to get all solution names under a base folder
-- Provides a method to get all project names in a solution folder.
-
+Change `selectedSolutionPath` and `mainPath` to the appropriate solution directory paths. Make sure that they point to the correct locations in your file system.
 
 
