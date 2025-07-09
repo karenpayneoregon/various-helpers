@@ -1,5 +1,8 @@
 ﻿namespace SolutionHelpers.Models;
 
+/// <summary>
+/// Represents an item that matches a file, containing its folder and file name information.
+/// </summary>
 public class FileMatchItem
 {
     public FileMatchItem(string sender)
