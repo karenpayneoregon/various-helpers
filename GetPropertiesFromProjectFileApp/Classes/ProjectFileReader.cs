@@ -3,6 +3,14 @@
 namespace GetPropertiesFromProjectFileApp.Classes;
 
 
+/// <summary>
+/// Provides functionality to read and extract properties from a .NET project file.
+/// </summary>
+/// <remarks>
+/// This class is designed to parse .csproj files and retrieve specific properties such as
+/// PackageId, Version, Authors, and Company. It assumes the project file is in XML format
+/// and adheres to the standard structure of .NET project files.
+/// </remarks>
 public static class ProjectFileReader
 {
     public static ProjectProperties GetProperties(string projectFilePath)

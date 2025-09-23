@@ -1,4 +1,12 @@
 ﻿namespace GetPropertiesFromProjectFileApp.Classes;
+
+/// <summary>
+/// Represents the properties of a .NET project file, such as PackageId, Version, Authors, and Company.
+/// </summary>
+/// <remarks>
+/// This class is used to store and manage metadata extracted from a .NET project file.
+/// It provides a structured way to access and manipulate project properties.
+/// </remarks>
 public class ProjectProperties
 {
     public string PackageId { get; set; } = string.Empty;
