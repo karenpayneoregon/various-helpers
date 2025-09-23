@@ -22,9 +22,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindInterfaces", "FindInter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualStudioExternalToolsApp", "VisualStudioExternalToolsApp\VisualStudioExternalToolsApp.csproj", "{CC423012-EF25-4E9C-AF18-F5442922A128}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{813F2800-5A06-4E98-B675-EC18B1B5B26C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetLibrary", "NuGetLibrary\NuGetLibrary.csproj", "{38120D23-C87D-4AAC-AE14-3AB220673070}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetPropertiesFromProjectFileApp", "GetPropertiesFromProjectFileApp\GetPropertiesFromProjectFileApp.csproj", "{3224C9DA-B6DA-49CA-AEA1-CA40E3AD61D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,14 +56,14 @@ Global
 		{CC423012-EF25-4E9C-AF18-F5442922A128}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC423012-EF25-4E9C-AF18-F5442922A128}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC423012-EF25-4E9C-AF18-F5442922A128}.Release|Any CPU.Build.0 = Release|Any CPU
-		{813F2800-5A06-4E98-B675-EC18B1B5B26C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{813F2800-5A06-4E98-B675-EC18B1B5B26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{813F2800-5A06-4E98-B675-EC18B1B5B26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{813F2800-5A06-4E98-B675-EC18B1B5B26C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38120D23-C87D-4AAC-AE14-3AB220673070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38120D23-C87D-4AAC-AE14-3AB220673070}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38120D23-C87D-4AAC-AE14-3AB220673070}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38120D23-C87D-4AAC-AE14-3AB220673070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3224C9DA-B6DA-49CA-AEA1-CA40E3AD61D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3224C9DA-B6DA-49CA-AEA1-CA40E3AD61D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3224C9DA-B6DA-49CA-AEA1-CA40E3AD61D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3224C9DA-B6DA-49CA-AEA1-CA40E3AD61D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
