@@ -44,6 +44,7 @@ internal partial class Program
 
         await PackageWork.GetVersionsForSeriLog();
 
+        PackageWork.DisplayPackagesGroupedByName();
         Console.ReadLine();
     }
 

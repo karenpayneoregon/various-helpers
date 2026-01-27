@@ -43,7 +43,7 @@ internal class ActivityOperations
     /// If the activity log file is found and read successfully, the boolean is <c>true</c> and the array contains the log lines.
     /// Otherwise, the boolean is <c>false</c> and the array is empty.
     /// </returns>
-    public static (string[] lines, bool success) ReadLog()
+    public static (string[] lines, bool success) ReadLog1()
     {
         var rootDirectory = VisualStudioRootActivityFolder(out var activityDirectory);
 
@@ -57,6 +57,31 @@ internal class ActivityOperations
             ([], false)!;
     }
 
+
+    public static (string[] lines, bool success) ReadLog()
+    {
+        var rootDirectory = VisualStudioRootActivityFolder(out var activityDirectory);
+        if (activityDirectory == null) return (Array.Empty<string>(), false);
+
+        var activityLogFileName = Path.Combine(rootDirectory, activityDirectory.Name, "ActivityLog.xml");
+        if (!File.Exists(activityLogFileName)) return (Array.Empty<string>(), false);
+
+        try
+        {
+            using var fs = new FileStream(activityLogFileName,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.ReadWrite | FileShare.Delete);
+            using var sr = new StreamReader(fs);
+            var content = new List<string>();
+            while (!sr.EndOfStream) content.Add(sr.ReadLine() ?? string.Empty);
+            return (content.ToArray(), true);
+        }
+        catch (IOException)
+        {
+            return (Array.Empty<string>(), false);
+        }
+    }
     /// <summary>
     /// Retrieves the most recently modified Visual Studio activity folder item that starts with a digit.
     /// </summary>

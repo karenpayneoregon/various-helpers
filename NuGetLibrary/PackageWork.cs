@@ -25,17 +25,42 @@ public partial class PackageWork
         {
             string packageName = Path.GetFileName(packageFolder);
 
-            packages.AddRange(
-                from folder in Directory.GetDirectories(packageFolder) 
-                select Path.GetFileName(folder) into version 
-                where VersionRegex().IsMatch(version) 
-                select new Package { Name = packageName, Version = version });
+            packages.AddRange(Directory.GetDirectories(packageFolder)
+                .Select(Path.GetFileName)
+                .Where(version => VersionRegex().IsMatch(version!))
+                .Select(version => new Package { Name = packageName, Version = version }));
         }
 
 
         return packages;
 
     }
+
+    public static void DisplayPackagesGroupedByName()
+    {
+        // Retrieve all available packages
+        var packages = AvailablePackages();
+
+        // Group by Name
+        IOrderedEnumerable<IGrouping<string, Package>> groupedPackages = packages
+            .GroupBy(p => p.Name)
+            .OrderBy(g => g.Key); // optional: alphabetically sort
+
+        StringBuilder sb = new();
+        
+        foreach (var group in groupedPackages)
+        {
+            sb.AppendLine($"Package: {group.Key}");
+            foreach (var pkg in group.OrderBy(p => p.Version))
+            {
+                sb.AppendLine($"  {pkg.Version}");
+            }
+            sb.AppendLine(); // spacing
+        }
+
+        File.WriteAllText("GroupedPackages.txt", sb.ToString());
+    }
+
 
     /// <summary>
     /// Retrieves a list of NuGet package sources, including their names, sources, and enabled statuses.
@@ -93,7 +118,6 @@ public partial class PackageWork
         StringBuilder stringBuilder = new();
         foreach (NuGetVersion version in versions)
         {
-            
             stringBuilder.AppendLine(version.ToString());
         }
 
