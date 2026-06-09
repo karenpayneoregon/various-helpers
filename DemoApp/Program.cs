@@ -9,7 +9,7 @@ internal partial class Program
     {
         string[] searchItems = ["karen", "Teams"];
         var text = "Karen uses Microsoft Teams at work.";
-        Console.WriteLine(text.Search(searchItems)
+        Console.WriteLine(text.SearchAny(searchItems)
             ? "Search items found in the text."
             : "Search items not found in the text.");
 

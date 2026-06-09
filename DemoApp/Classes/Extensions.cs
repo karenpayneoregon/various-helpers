@@ -15,7 +15,7 @@ public static class Extensions
     /// <remarks>
     /// The comparison is performed using <see cref="StringComparison.OrdinalIgnoreCase"/>.
     /// </remarks>
-    public static bool Search(this string sender, string[] tokens)
+    public static bool SearchAny(this string sender, string[] tokens)
         => sender.AsSpan().ContainsAny(
             SearchValues.Create(tokens, StringComparison.OrdinalIgnoreCase));
 
