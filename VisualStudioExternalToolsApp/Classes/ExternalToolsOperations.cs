@@ -9,8 +9,7 @@ namespace VisualStudioExternalToolsApp.Classes;
 /// </summary>
 public static class ExternalToolsOperations
 {
-    private const string ExternalToolsCategoryName =
-        "Environment_ExternalTools";
+    private const string ExternalToolsCategoryName = "Environment_ExternalTools";
 
     /// <summary>
     /// Reads user-created external tools from a Visual Studio settings file.
