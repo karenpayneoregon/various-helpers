@@ -30,8 +30,7 @@ public static class ExternalToolsOperations
     /// <exception cref="System.Xml.XmlException">
     /// Thrown when the settings file does not contain valid XML.
     /// </exception>
-    public static IEnumerable<ExternalTool> ReadExternalTools(
-        string vsSettingsPath)
+    public static IEnumerable<ExternalTool> ReadExternalTools(string vsSettingsPath)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(vsSettingsPath);
 

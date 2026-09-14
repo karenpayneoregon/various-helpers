@@ -12,11 +12,12 @@ public sealed class EnvironmentSettings
     private EnvironmentSettings()
     {
         var userName = Environment.UserName;
-        // C:\Users\Payne\AppData\Local\Microsoft\VisualStudio\18.0_370e5cf8\Settings
+        // vs2022 version
         // FilePath = $"C:\\Users\\{userName}\\AppData\\Local\\Microsoft\\VisualStudio\\17.0_f56beab6\\Settings";
+
+        // vs2026 version
         FilePath = $"C:\\Users\\{userName}\\AppData\\Local\\Microsoft\\VisualStudio\\18.0_370e5cf8\\Settings";
         DirectoryExists = Directory.Exists(FilePath);
-        //FileName = Path.Combine(FilePath, "CurrentSettings.vssettings");
         FileName = Path.Combine(FilePath, "CurrentSettings.vssettings");
         FileExists = File.Exists(FileName);
     }
