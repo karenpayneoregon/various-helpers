@@ -4,90 +4,159 @@ using System.Xml.Linq;
 namespace VisualStudioExternalToolsApp.Classes;
 
 /// <summary>
-/// Provides operations for handling external tools configurations in Visual Studio.
+/// Provides operations for reading and writing Visual Studio external-tool
+/// configurations.
 /// </summary>
-/// <remarks>
-/// This class includes methods to read and process external tool configurations from Visual Studio settings files.
-/// It parses the settings file to extract details about user-created external tools, such as their index, title,
-/// command, arguments, initial directory, and additional properties.
-/// </remarks>
-public class ExternalToolsOperations
+public static class ExternalToolsOperations
 {
+    private const string ExternalToolsCategoryName =
+        "Environment_ExternalTools";
+
     /// <summary>
-    /// Reads the external tools configuration from a specified Visual Studio settings file.
+    /// Reads user-created external tools from a Visual Studio settings file.
     /// </summary>
     /// <param name="vsSettingsPath">
-    /// The full path to the Visual Studio settings file (e.g., "CurrentSettings.vssettings") 
-    /// containing the external tools configuration.
+    /// The complete path to the Visual Studio .vssettings file.
     /// </param>
     /// <returns>
-    /// An enumerable collection of <see cref="ExternalTool"/> objects representing the external tools
-    /// defined in the specified settings file. If no tools are found, an empty collection is returned.
+    /// The user-created external tools found in the settings file.
     /// </returns>
-    /// <remarks>
-    /// This method parses the Visual Studio settings file to extract details about user-created external tools.
-    /// Each tool's configuration includes properties such as its index, title, command, arguments, initial directory,
-    /// and additional flags indicating whether it is a GUI application and whether it should close on exit.
-    /// </remarks>
+    /// <exception cref="ArgumentException">
+    /// Thrown when <paramref name="vsSettingsPath"/> is empty.
+    /// </exception>
     /// <exception cref="FileNotFoundException">
-    /// Thrown if the specified settings file does not exist.
+    /// Thrown when the settings file does not exist.
     /// </exception>
     /// <exception cref="System.Xml.XmlException">
-    /// Thrown if the specified settings file is not a valid XML document.
+    /// Thrown when the settings file does not contain valid XML.
     /// </exception>
-    public static IEnumerable<ExternalTool> ReadExternalTools(string vsSettingsPath)
+    public static IEnumerable<ExternalTool> ReadExternalTools(
+        string vsSettingsPath)
     {
-        var doc = XDocument.Load(vsSettingsPath);
+        ArgumentException.ThrowIfNullOrWhiteSpace(vsSettingsPath);
 
-        var toolsRoot = doc
-            .Descendants("Category")
-                .FirstOrDefault(c => (string?)c.Attribute("name") == "Environment_ExternalTools")
-            ?.Element("ExternalTools");
+        var document = XDocument.Load(vsSettingsPath);
 
-        if (toolsRoot == null)
-            yield break;   // Nothing there – bail out.
+        /*
+         * VS2026 can export more than one Environment_ExternalTools
+         * category. The first category may contain only
+         * ExcludeRegisteredTool elements.
+         *
+         * Therefore, do not use FirstOrDefault(). Process every matching
+         * category and select its UserCreatedTool elements.
+         *
+         * Name.LocalName also allows the code to work if a Visual Studio
+         * version adds an XML namespace to the settings document.
+         */
+        var toolElements = document
+            .Descendants()
+            .Where(IsExternalToolsCategory)
+            .SelectMany(category => category
+                .Elements()
+                .Where(element => HasName(element, "ExternalTools")))
+            .SelectMany(externalTools => externalTools
+                .Elements()
+                .Where(element => HasName(element, "UserCreatedTool")));
 
-        foreach (var tool in toolsRoot.Elements("UserCreatedTool"))
+        foreach (var toolElement in toolElements)
         {
             yield return new ExternalTool
             {
-                Index = (int?)tool.Element("Index") ?? -1,
-                Title = (string?)tool.Element("Title") ?? "",
-                Command = (string?)tool.Element("Command") ?? "",
-                Arguments = (string?)tool.Element("Arguments") ?? "(none)",
-                InitialDirectory = (string?)tool.Element("InitialDirectory") ?? "(none)",
-                IsGuiApp = (bool?)tool.Element("IsGUIapp") ?? false,
-                CloseOnExit = (bool?)tool.Element("CloseOnExit") ?? false
+                Index = ReadInt(toolElement, "Index", -1),
+                Title = ReadString(toolElement, "Title"),
+                Command = ReadString(toolElement, "Command"),
+                Arguments = ReadString(toolElement, "Arguments","(none)"),
+                InitialDirectory = ReadString(toolElement, "InitialDirectory", "(none)"),
+                IsGuiApp = ReadBoolean(toolElement, "IsGUIapp"),
+                CloseOnExit = ReadBoolean(toolElement, "CloseOnExit")
             };
         }
     }
 
     /// <summary>
-    /// Writes a collection of external tools to a JSON file at the specified output path.
+    /// Writes external-tool configurations to a JSON file.
     /// </summary>
     /// <param name="outputPath">
-    /// The file path where the JSON representation of the external tools will be written.
+    /// The complete path of the output JSON file.
     /// </param>
     /// <param name="tools">
-    /// A collection of <see cref="ExternalTool"/> objects representing the external tools to be serialized.
+    /// The external tools to serialize.
     /// </param>
-    /// <remarks>
-    /// This method serializes the provided collection of external tools into a JSON format and writes it to the specified file.
-    /// The JSON output is formatted with indentation for better readability.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="outputPath"/> or <paramref name="tools"/> is <c>null</c>.
-    /// </exception>
-    /// <exception cref="IOException">
-    /// Thrown if an I/O error occurs while writing to the file.
-    /// </exception>
     public static void WriteToolsJson(string outputPath, IEnumerable<ExternalTool> tools)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(outputPath);
+        ArgumentNullException.ThrowIfNull(tools);
+
         var options = new JsonSerializerOptions
         {
             WriteIndented = true
         };
 
-        File.WriteAllText(outputPath, JsonSerializer.Serialize(tools, options));
+        var json = JsonSerializer.Serialize(tools, options);
+
+        File.WriteAllText(outputPath, json);
+    }
+
+    private static bool IsExternalToolsCategory(XElement element)
+    {
+        if (!HasName(element, "Category"))
+        {
+            return false;
+        }
+
+        var categoryName = element
+            .Attributes()
+            .FirstOrDefault(attribute =>
+                string.Equals(
+                    attribute.Name.LocalName,
+                    "name",
+                    StringComparison.OrdinalIgnoreCase))
+            ?.Value;
+
+        return string.Equals(categoryName, ExternalToolsCategoryName, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool HasName(XElement element, string localName) =>
+        string.Equals(
+            element.Name.LocalName,
+            localName,
+            StringComparison.OrdinalIgnoreCase);
+
+    private static XElement? FindChild(XElement parent, string localName) =>
+        parent
+            .Elements()
+            .FirstOrDefault(element =>
+                HasName(element, localName));
+
+    private static string ReadString(XElement parent, string elementName, string defaultValue = "")
+    {
+        var value = FindChild(parent, elementName)?.Value;
+
+        return string.IsNullOrWhiteSpace(value)
+            ? defaultValue
+            : value;
+    }
+
+    private static int ReadInt(XElement parent, string elementName, int defaultValue)
+    {
+        var value = FindChild(parent, elementName)?.Value;
+
+        return int.TryParse(value, out var result)
+            ? result
+            : defaultValue;
+    }
+
+    private static bool ReadBoolean(XElement parent, string elementName)
+    {
+        var value = FindChild(parent, elementName)?.Value;
+
+        if (bool.TryParse(value, out var booleanResult))
+        {
+            return booleanResult;
+        }
+
+        // Some Visual Studio settings use 0 and 1 for Boolean values.
+        return int.TryParse(value, out var integerResult) &&
+               integerResult != 0;
     }
 }
