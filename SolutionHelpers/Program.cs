@@ -17,7 +17,7 @@ internal class Program
     static async Task Main(string[] args)
     {
 
-        var selectedSolutionPath = "C:\\OED\\DotnetLand\\VS2022\\HowToSeriesSolution";
+        var selectedSolutionPath = "C:\\DotnetLand\\VS2026\\various-helpers";
 
         if (Directory.Exists(selectedSolutionPath))
         {
@@ -25,12 +25,13 @@ internal class Program
 
             if (projects.Count > 0)
             {
+                Console.WriteLine($"Found {projects.Count} projects.");
                 await File.WriteAllLinesAsync("Projects.txt", projects);
             }
         }
 
 
-        var mainPath = "C:\\OED\\DotnetLand\\VS2022";
+        var mainPath = "C:\\DotnetLand\\VS2026";
         if (Directory.Exists(mainPath))
         {
             List<FileMatchItem1> solutions = [];
@@ -44,6 +45,7 @@ internal class Program
 
             if (solutions.Count > 0)
             {
+                Console.WriteLine($"Found {solutions.Count} solutions.");
                 await File.WriteAllLinesAsync("Solutions.txt", solutions.Select(x => x.FilePath).ToArray());
             }
         }
